@@ -1,0 +1,10 @@
+{
+  "port": 8081,
+  "train_info":{
+    "section_capacity":100,
+    "from": "LONDON",
+    "to": "FRANCE",
+    "price": 20
+  },
+  "list_tickets_page_size": 5
+}

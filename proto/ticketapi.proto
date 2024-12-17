@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package proto;
+option go_package = "cloudbees/ticket-api/proto";
+
+service TicketAPI {
+  rpc BookTicket(BookTicketRequest) returns (Ticket) {}
+  rpc CancelTicket(GetTicketRequest) returns (google.protobuf.Empty) {}
+  rpc ModifyTicket(ModifyTicketRequest) returns (Ticket) {}
+  rpc GetTicket(GetTicketRequest) returns (Ticket) {}
+  rpc ListTickets(ListTicketRequest) returns (Tickets) {}
+}
+
+enum Section{
+  A = 0;
+  B = 1;
+};
+
+message BookTicketRequest {
+    Section section = 1;
+    User user = 2;
+};
+
+message ModifyTicketRequest {
+  string ticket_id = 1;
+  User user = 2;
+};
+
+message GetTicketRequest {
+  string ticket_id = 1;
+};
+
+message ListTicketRequest {
+  Section section = 1;
+  int32 page_num = 2;
+};
+
+message Ticket {
+  string from = 1;
+  string to = 2;
+  int32 seat_number = 3;
+  int32 price = 4;
+  string ticket_id = 5;
+  User user = 6;
+};
+
+message Tickets {
+  repeated Ticket tickets = 1;
+};
+
+message User {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+};
